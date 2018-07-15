@@ -81,7 +81,7 @@ class NestedForms
             success: function (raw_data)
             {
                 var data = $.parseJSON(raw_data);
-                this.render_modal(data);
+                this.renderModal(data);
                 $('#modal-form').modal('show');
             },
             error: function (xhr, status, error)

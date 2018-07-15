@@ -1,11 +1,11 @@
 <?php
 
 /*
-	READ! THIS FILE IS NOT NEEDED!
+	READ FIRST! THIS FILE IS NOT NEEDED!
 
-    Its just an Example Controller taken for laravel to show how i'm communicating with my RESTS, but you
-    can use your own REST method like a direct connection to database, just respect urls used
-    when initializing js class and the returning JSON format.
+	Its just an Example Controller taken for laravel to show how i'm communicating with my RESTS, but you
+	can use your own REST method like a direct connection to database, just respect urls used
+	when initializing js class and the returning JSON format.
 	
 	In this example my routes are:
 	GET	index = "/users/"		-> return all users

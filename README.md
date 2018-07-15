@@ -12,16 +12,14 @@ your custom URLs.
 This system works with rest url, if you need, you can build your php connection with your methos. All results to js must be JSON formatted
 
 ### EXPLANATION OF THE PARAMS:
-**model:** [optional] Models are used to generate form urls, for example if you use 'users' as model name, form action url will be generated as '/users/' and '/users/{id}'. See code example in customurl section for defaults.
-
-**elementID:** [needed] The ID of element to attach results and modal window, this is the main container.
-
-**columns:** [needed] The database columns structure for each column, you must indicate some params:
-        **key:** (true/false) if the column is the primary column key, set it to true.
-        **name:** (string) Display name of the column
-        **input_type:** (string) Put type of the column here. You can choose between: text, number and select (for now)
-        **defaultValue:** (string) If you want to set a default value for that column, use this.
-        **resources:** [needed if type is "select"] (json) If you are using select as input type, you must indicate a list of key=values
+- **model:** [optional] Models are used to generate form urls, for example if you use 'users' as model name, form action url will be generated as '/users/' and '/users/{id}'. See code example in customurl section for defaults.
+- **elementID:** [needed] The ID of element to attach results and modal window, this is the main container.
+- **columns:** [needed] The database columns structure for each column, you must indicate some params:
+  - **key:** (true/false) if the column is the primary column key, set it to true.
+  - **name:** (string) Display name of the column
+  - **input_type:** (string) Put type of the column here. You can choose between: text, number and select (for now)
+  - **defaultValue:** (string) If you want to set a default value for that column, use this.
+  - **resources:** [needed if type is "select"] (json) If you are using select as input type, you must indicate a list of key=values
 
 
 

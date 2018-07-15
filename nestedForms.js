@@ -1,7 +1,7 @@
 class NestedForms
 {
     // VARIABLES
-    constructor(model, elementID, columns, customurls = null)
+    constructor(model, elementID, columns, customurls = null, token)
     {
         this.error = false;
 
@@ -19,7 +19,7 @@ class NestedForms
         this.resourceModel = model;
         this.elementDiv = $('#' + elementID);
         this.columns = columns;
-        this.token = '{{ csrf_token() }}';
+        this.token = token;
         this.resourceIndex();
         this.renderModal();
 
@@ -130,7 +130,7 @@ class NestedForms
             url: type,
             data: _this.serialize(),
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': this.token,
                 'Content-type': 'application/x-www-form-urlencoded'
             },
             cache: false,

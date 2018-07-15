@@ -1,7 +1,7 @@
 class NestedForms
 {
     // VARIABLES
-    constructor(model, elementID, columns)
+    constructor(model, elementID, columns, customurls = null)
     {
         this.error = false;
 
@@ -13,6 +13,8 @@ class NestedForms
 
         if(this.key == "")
             this.reportError("Missing Key! You must put a key = true on a column!");
+
+        this.customurls = customurls;
 
         this.resourceModel = model;
         this.elementDiv = $('#' + elementID);
@@ -27,10 +29,19 @@ class NestedForms
     {
         if(!this.error)
         {
+            var url = '/' + this.resourceModel + '/';
+            var type = "GET";
+
+            if(this.customurls)
+            {
+                var url = this.customurls.index.url;
+                var type = this.customurls.index.type;
+            }
+
             $.ajax({
                 context: this,
-                type: "GET",
-                url: '/' + this.resourceModel + '/',
+                type: type,
+                url: url,
                 contentType: false,
                 success: function (raw_data) {
                     var data = $.parseJSON(raw_data);
@@ -51,10 +62,21 @@ class NestedForms
 
     resourceClickEdit(id)
     {
+        var url = '/' + this.resourceModel + '/{id}';
+        var type = "GET";
+
+        if(this.customurls)
+        {
+            var url = this.customurls.show.url;
+            var type = this.customurls.show.type;
+        }
+
+        var url = str.replace("{id}", id);
+
         $.ajax({
             context: this,
-            type: "GET",
-            url: '/' + this.resourceModel + '/'+id,
+            type: type,
+            url: url,
             contentType: false,
             success: function (raw_data)
             {
@@ -79,19 +101,33 @@ class NestedForms
 
         if(id)
         {
-            var action = '/'+this.resourceModel+'/'+id;
-            var method = 'PATCH';
+            var url = '/'+this.resourceModel+'/'+id;
+            var type = 'PATCH';
+
+            if(this.customurls)
+            {
+                var url = this.customurls.update.url;
+                var type = this.customurls.update.type;
+            }
+
+            var url = str.replace("{id}", id);
         }
         else
         {
-            var action = '/'+this.resourceModel+'/';
-            var method = 'POST';
+            var url = '/'+this.resourceModel+'/';
+            var type = 'POST';
+
+            if(this.customurls)
+            {
+                var url = this.customurls.store.url;
+                var type = this.customurls.store.type;
+            }
         }
 
         $.ajax({
             context: this,
-            type: method,
-            url: action,
+            type: url,
+            url: type,
             data: _this.serialize(),
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',

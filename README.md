@@ -81,7 +81,8 @@ This is an Example of implementation:
                     }
             }
 
-        let nest = new NestedForms('users', 'myUserList', columns, customurls);
+            // constructor(model, elementID, columns, customurls = null, token)
+            let nest = new NestedForms('users', 'myUserList', columns, customurls, "mytoken");
 
     });
 </script>

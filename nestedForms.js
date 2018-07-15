@@ -14,6 +14,17 @@ class NestedForms
         if(this.key == "")
             this.reportError("Missing Key! You must put a key = true on a column!");
 
+        // setting labels
+        this.labels = {};
+        if(params.labels)
+        {
+            if (params.labels.button_send == undefined) this.labels.button_send = "Send";
+            else this.labels.button_send = params.labels.button_send;
+
+            if (params.labels.button_close == undefined) this.labels.button_close = "Close";
+            else this.labels.button_close = params.labels.button_close;
+        }
+
         this.resourceModel = params.model;
         this.elementDiv = $('#' + params.elementID);
         this.columns = params.columns;

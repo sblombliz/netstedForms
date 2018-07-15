@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My test page</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="nestedForms.js"></script>
+    <script>
+        $( document ).ready(function()
+        {
+            let columns =
+                {
+                    id:
+                        {
+                            key: true,
+                            name: "ID",
+                            input_type: "text",
+                            visible: false,
+                            defaultValue: null,
+                            resources: null,
+                        },
+                    name:
+                        {
+                            key: false,
+                            name: "Name",
+                            input_type: "text",
+                            visible: false,
+                            defaultValue: null,
+                            resources: null,
+                        },
+                    role_id:
+                        {
+                            key: false,
+                            name: "Role",
+                            input_type: "select",
+                            visible: true,
+                            defaultValue: null,
+                            resources: [
+                                {"id":"1", "name":"manager"},
+                                {"id":"2", "name":"commercial"},
+                                {"id":"3", "name":"agent"}
+                            ]
+                        },
+                };
+
+            let customurls =
+                {
+                    index:
+                        {
+                            method: "GET",
+                            url: "/users/"
+                        },
+                    show:
+                        {
+                            method: "GET",
+                            url: "/users/{id}"
+                        },
+                    store:
+                        {
+                            method: "PUSH",
+                            url: "/users/"
+                        },
+                    update:
+                        {
+                            method: "PATCH",
+                            url: "/users/{id}"
+                        },
+                    delete:
+                        {
+                            method: "DELETE",
+                            url: "/users/{id}"
+                        }
+                }
+
+            let nest = new NestedForms('users', 'myUserList', columns, customurls);
+
+        });
+    </script>
+
+    <body>
+
+        <h1>NestedForms is Cool!</h1>
+
+        <p>This is my Test User List</p>
+        <div id="myUserList"></div>
+
+    </body>
+</html>

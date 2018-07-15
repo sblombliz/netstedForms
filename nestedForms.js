@@ -195,7 +195,7 @@ class NestedForms
             content += '    <div class="modal-dialog">';
             content += '        <div class="modal-content">';
 
-            content += '            {!! Form::open(["autocomplete" => "off", "id"=>"frm"]) !!}';
+            content += '            <form method="POST" action="" accept-charset="UTF-8" autocomplete="off" id="frm">';
 
             content += '            <div class="modal-header">';
             content += '               <button type="button" class="close" data-dismiss="modal">&times;</button>';
@@ -209,7 +209,7 @@ class NestedForms
             content += '            <div class="modal-footer">';
             content += '            </div>';
 
-            content += '            {!! Form::close() !!}';
+            content += '            </form>';
 
             content += '        </div>';
             content += '    </div>';

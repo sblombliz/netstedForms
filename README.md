@@ -15,12 +15,14 @@ This is an Example of implementation:
 ```
 <script src="nestedForms.js"></script>
 <script>
-    $( document ).ready(function()
-    {
-        let columns =
-            {
-                id:
-                    {
+        $( document ).ready(function()
+        {
+            let nest = new NestedForms({
+
+                model: 'users',
+                elementID: 'myUserList',
+                columns: {
+                    id: {
                         key: true,
                         name: "ID",
                         input_type: "text",
@@ -28,8 +30,7 @@ This is an Example of implementation:
                         defaultValue: null,
                         resources: null,
                     },
-                name:
-                    {
+                    name: {
                         key: false,
                         name: "Name",
                         input_type: "text",
@@ -37,53 +38,48 @@ This is an Example of implementation:
                         defaultValue: null,
                         resources: null,
                     },
-                role_id:
-                    {
+                    role_id: {
                         key: false,
                         name: "Role",
                         input_type: "select",
                         visible: true,
                         defaultValue: null,
                         resources: [
-                            {"id":"1", "name":"manager"},
-                            {"id":"2", "name":"commercial"},
-                            {"id":"3", "name":"agent"}
+                            {"id": "1", "name": "manager"},
+                            {"id": "2", "name": "commercial"},
+                            {"id": "3", "name": "agent"}
                         ]
                     },
-            };
-
-        let customurls =
-            {
-                index:
-                    {
+                },
+                customurls: {
+                    index: {
                         method: "GET",
                         url: "/users/"
                     },
-                show:
-                    {
+                    show: {
                         method: "GET",
                         url: "/users/{id}"
                     },
-                store:
-                    {
+                    store: {
                         method: "PUSH",
                         url: "/users/"
                     },
-                update:
-                    {
+                    update: {
                         method: "PATCH",
                         url: "/users/{id}"
                     },
-                delete:
-                    {
+                    delete: {
                         method: "DELETE",
                         url: "/users/{id}"
                     }
-            }
+                },
+                labels: {
+                    button_send: "Custom Send Text",
+                    button_close: "Custom Close Text",
+                },
+                token: 'MySecretTokenText',
+            });
 
-            // constructor(model, elementID, columns, customurls = null, token)
-            let nest = new NestedForms('users', 'myUserList', columns, customurls, "mytoken");
-
-    });
+        });
 </script>
 ```

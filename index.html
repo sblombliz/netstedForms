@@ -10,72 +10,68 @@
     <script>
         $( document ).ready(function()
         {
-            let columns =
-                {
-                    id:
-                        {
-                            key: true,
-                            name: "ID",
-                            input_type: "text",
-                            visible: false,
-                            defaultValue: null,
-                            resources: null,
-                        },
-                    name:
-                        {
-                            key: false,
-                            name: "Name",
-                            input_type: "text",
-                            visible: false,
-                            defaultValue: null,
-                            resources: null,
-                        },
-                    role_id:
-                        {
-                            key: false,
-                            name: "Role",
-                            input_type: "select",
-                            visible: true,
-                            defaultValue: null,
-                            resources: [
-                                {"id":"1", "name":"manager"},
-                                {"id":"2", "name":"commercial"},
-                                {"id":"3", "name":"agent"}
-                            ]
-                        },
-                };
+            let nest = new NestedForms({
 
-            let customurls =
-                {
-                    index:
-                        {
-                            method: "GET",
-                            url: "/users/"
-                        },
-                    show:
-                        {
-                            method: "GET",
-                            url: "/users/{id}"
-                        },
-                    store:
-                        {
-                            method: "PUSH",
-                            url: "/users/"
-                        },
-                    update:
-                        {
-                            method: "PATCH",
-                            url: "/users/{id}"
-                        },
-                    delete:
-                        {
-                            method: "DELETE",
-                            url: "/users/{id}"
-                        }
-                }
-
-            // constructor(model, elementID, columns, customurls = null, token)
-            let nest = new NestedForms('users', 'myUserList', columns, customurls, "mytoken");
+                model: 'users',
+                elementID: 'myUserList',
+                columns: {
+                    id: {
+                        key: true,
+                        name: "ID",
+                        input_type: "text",
+                        visible: false,
+                        defaultValue: null,
+                        resources: null,
+                    },
+                    name: {
+                        key: false,
+                        name: "Name",
+                        input_type: "text",
+                        visible: false,
+                        defaultValue: null,
+                        resources: null,
+                    },
+                    role_id: {
+                        key: false,
+                        name: "Role",
+                        input_type: "select",
+                        visible: true,
+                        defaultValue: null,
+                        resources: [
+                            {"id": "1", "name": "manager"},
+                            {"id": "2", "name": "commercial"},
+                            {"id": "3", "name": "agent"}
+                        ]
+                    },
+                },
+                customurls: {
+                    index: {
+                        method: "GET",
+                        url: "/users/"
+                    },
+                    show: {
+                        method: "GET",
+                        url: "/users/{id}"
+                    },
+                    store: {
+                        method: "PUSH",
+                        url: "/users/"
+                    },
+                    update: {
+                        method: "PATCH",
+                        url: "/users/{id}"
+                    },
+                    delete: {
+                        method: "DELETE",
+                        url: "/users/{id}"
+                    }
+                },
+                labels: {
+                    button_send: "Custom Send Text",
+                    button_close: "Custom Close Text",
+                },
+                token: 'MySecretTokenText',
+            });
 
         });
     </script>

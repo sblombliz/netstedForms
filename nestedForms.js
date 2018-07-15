@@ -1,25 +1,23 @@
 class NestedForms
 {
     // VARIABLES
-    constructor(model, elementID, columns, customurls = null, token)
+    constructor(params)
     {
         this.error = false;
 
         // Check for missing Key
         this.key = "";
-        for(var c in columns)
-            if(columns[c].key)
+        for(var c in params.columns)
+            if(params.columns[c].key)
                 this.key = c;
 
         if(this.key == "")
             this.reportError("Missing Key! You must put a key = true on a column!");
 
-        this.customurls = customurls;
-
-        this.resourceModel = model;
-        this.elementDiv = $('#' + elementID);
-        this.columns = columns;
-        this.token = token;
+        this.resourceModel = params.model;
+        this.elementDiv = $('#' + params.elementID);
+        this.columns = params.columns;
+        this.token = params.token;
         this.resourceIndex();
         this.renderModal();
 
@@ -221,7 +219,7 @@ class NestedForms
         var sendButton = document.createElement('input');
         sendButton.className = 'btn btn-primary';
         sendButton.type = 'submit';
-        sendButton.value = '@lang("general.button_submit")';
+        sendButton.value = this.labels.button_send;
         if(data)
             sendButton.addEventListener("click", this.resourceStoreUpdate.bind(this, data[this.key])); // TODO: pref use 'this' to pass the form
         else
@@ -234,7 +232,7 @@ class NestedForms
         closeButton.className = 'btn btn-primary m-t-10';
         closeButton.type = 'button';
         closeButton.setAttribute('data-dismiss', 'modal');
-        closeButton.value = '@lang("general.button_close")';
+        closeButton.value = this.labels.button_close;
         $('.modal-footer').append(closeButton);
 
 

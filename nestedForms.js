@@ -26,12 +26,18 @@ class NestedForms
         }
 
         this.resourceModel = params.model;
+        this.filter = params.filter;
         this.elementDiv = $('#' + params.elementID);
         this.columns = params.columns;
         this.token = params.token;
         this.resourceIndex();
         this.renderModal();
 
+    }
+
+    filterData(item)
+    {
+        return item[this.filter.column] == this.filter.value;
     }
 
     resourceIndex()
@@ -54,6 +60,10 @@ class NestedForms
                 contentType: false,
                 success: function (raw_data) {
                     var data = $.parseJSON(raw_data);
+
+                    if(this.filter != null)
+                        data = data.filter(this.filterData, this);
+
                     this.resourceRender(data);
                 },
                 error: function (xhr, status, error) {
@@ -329,6 +339,20 @@ class NestedForms
                         break;
                 }
             }
+        }
+
+        // adding filter
+        if(this.filter != null)
+        {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.id = this.filter.column;
+            input.name = this.filter.column;
+            if (data)
+                input.value = data[this.filter.column];
+            else
+                input.value = this.filter.value;
+            attachTo.append(input);
         }
 
     }

@@ -20,7 +20,7 @@ This system works with rest url, if you need, you can build your php connection 
 - **columns:** (object) [needed] The database columns structure for each column, you must indicate some params:
   - **key:** (true/false) if the column is the primary column key, set it to true.
   - **name:** (string) Display name of the column
-  - **input_type:** (string) Put type of the column here. You can choose between: text, number and select (for now)
+  - **input_type:** (string) Put type of the column here. You can choose between: text, number, date and select (for now)
   - **defaultValue:** (string) If you want to set a default value for that column, use this.
   - **resources:** [needed if type is "select"] (json) If you are using select as input type, you must indicate a list of key=values
 - **customurls:** (object)

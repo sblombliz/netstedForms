@@ -295,6 +295,19 @@ class NestedForms
                         divgroup.append(input);
                         break;
 
+                    case('date'):
+                        var input = document.createElement('input');
+                        input.type = 'date';
+                        input.id = c;
+                        input.className = 'form-control date';
+                        input.name = c;
+                        if (data)
+                            input.value = data[c];
+                        else
+                            input.value = this.columns[c].defaultValue;
+                        divgroup.append(input);
+                        break;
+
                     case('number'):
                         var input = document.createElement('input');
                         input.type = 'number';

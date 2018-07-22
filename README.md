@@ -105,5 +105,5 @@ This is an Example of implementation:
 </script>
 ```
 
-####If you're thinking that this documentation is not complete, you're right. 
-####Soon I will try to write a more precise one. In the meantime, you can contact me for information on discord: https://discord.gg/S4jPyfk
+#### If you're thinking that this documentation is not complete, you're right. 
+#### Soon I will try to write a more precise one. In the meantime, you can found me on discord: https://discord.gg/S4jPyfk

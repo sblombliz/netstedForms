@@ -23,7 +23,13 @@ This system works with rest url, if you need, you can build your php connection 
   - **input_type:** (string) Put type of the column here. You can choose between: text, number and select (for now)
   - **defaultValue:** (string) If you want to set a default value for that column, use this.
   - **resources:** [needed if type is "select"] (json) If you are using select as input type, you must indicate a list of key=values
-
+- **customurls:** (object)
+- **labels:** (object) Overwrite common buttons
+  - **button_send:** (string) custom name for Send Button
+  - **button_close:** (string) custom name for Close Button
+- **customButtons:** (array of objects)
+  - **name:** (string) label name of button
+  - **url:** (string) href destination of button
 
 
 This is an Example of implementation:
@@ -98,3 +104,6 @@ This is an Example of implementation:
         });
 </script>
 ```
+
+####If you're thinking that this documentation is not complete, you're right. 
+####Soon I will try to write a more precise one. In the meantime, you can contact me for information on discord: https://discord.gg/S4jPyfk

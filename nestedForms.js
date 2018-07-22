@@ -456,7 +456,7 @@ class NestedForms
                 document.getElementById("action_buttons_" + row).appendChild(delBtn);
                 for(var item in customB)
                     document.getElementById("action_buttons_" + row).appendChild(customB[item]);
-                
+
             }
         }
     }

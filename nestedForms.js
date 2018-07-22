@@ -29,6 +29,7 @@ class NestedForms
         this.filter = params.filter;
         this.elementDiv = $('#' + params.elementID);
         this.columns = params.columns;
+        this.customButtons = params.customButtons;
         this.token = params.token;
         this.resourceIndex();
         this.renderModal();
@@ -427,6 +428,18 @@ class NestedForms
                 editBtn.innerHTML = "Edit";
                 editBtn.addEventListener("click", this.resourceClickEdit.bind(this, data[row][this.key]));
 
+                var customB = [];
+                for(var index in this.customButtons)
+                {
+                    var item = this.customButtons[index];
+                    var buttn = document.createElement('a');
+                    buttn.style = "margin: 0px 2px;";
+                    buttn.className = "btn btn-info inline";
+                    buttn.href = item.url;
+                    buttn.innerHTML = item.name;
+                    customB.push(buttn);
+                }
+
                 contentValues += '</td>';
 
                 // Create the new row
@@ -441,6 +454,9 @@ class NestedForms
 
                 document.getElementById("action_buttons_" + row).appendChild(editBtn);
                 document.getElementById("action_buttons_" + row).appendChild(delBtn);
+                for(var item in customB)
+                    document.getElementById("action_buttons_" + row).appendChild(customB[item]);
+                
             }
         }
     }

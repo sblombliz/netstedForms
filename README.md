@@ -30,7 +30,9 @@ This system works with rest url, if you need, you can build your php connection 
 - **customButtons:** (array of objects)
   - **name:** (string) label name of button
   - **url:** (string) href destination of button
-
+- **eventBeforeCreate** (function(item)) This event will be raised before start ajax Create request. Param "item" contain all visibile form values.
+- **eventBeforeEdit** (function(item)) This event will be raised before start ajax Edit request. Param "item" contain all visibile form values.
+- **eventBeforeDelete** (function(item)) This event will be raised before start ajax Delete request. Param "item" contain all visibile form values.
 
 This is an Example of implementation:
 ```
@@ -97,6 +99,15 @@ This is an Example of implementation:
                 labels: {
                     button_send: "Custom Send Text",    //defaultValue: "Send"
                     button_close: "Custom Close Text",  //defaultValue: "Close"
+                },
+                eventBeforeCreate: function(item) {
+                    console.log(item);
+                },
+                eventBeforeEdit: function(item) {
+                    console.log(item);
+                },
+                eventBeforeDelete: function(item) {
+                    console.log(item);
                 },
                 token: 'MySecretTokenText',
             });

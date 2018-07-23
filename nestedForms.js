@@ -34,6 +34,10 @@ class NestedForms
         this.resourceIndex();
         this.renderModal();
 
+        this.eventBeforeCreate = params.eventBeforeCreate;
+        this.eventBeforeEdit = params.eventBeforeEdit;
+        this.eventBeforeDelete = params.eventBeforeDelete;
+
     }
 
     filterData(item)
@@ -124,6 +128,7 @@ class NestedForms
             var url = '/'+this.resourceModel+'/'+id;
             var type = 'PATCH';
 
+            // CUSTOM URLS
             if(this.customurls)
             {
                 var url = this.customurls.update.url;
@@ -131,17 +136,50 @@ class NestedForms
             }
 
             var url = str.replace("{id}", id);
+
+            // RAISE EVENT BEFORE EDIT
+            var objects = {};
+            for(var c in this.columns)
+            {
+                var val = $('#' + c).val();
+                if(typeof val !== 'undefined')
+                    objects[c] = $('#' + c).val();
+                else
+                {
+                    // TODO: there are no hidden input for visible false
+                    // if its the key the value is current id
+                    if(this.columns[c].key == true)
+                        objects[c] = id;
+                    else
+                        objects[c] = null;
+                }
+
+            }
+            this.eventBeforeEdit(objects);
         }
         else
         {
             var url = '/'+this.resourceModel+'/';
             var type = 'POST';
 
+            // CUSTOM URLS
             if(this.customurls)
             {
                 var url = this.customurls.store.url;
                 var type = this.customurls.store.type;
             }
+
+            // RAISE EVENT BEFORE CREATE
+            var objects = {};
+            for(var c in this.columns)
+            {
+                var val = $('#' + c).val();
+                if(typeof val !== 'undefined')
+                    objects[c] = $('#' + c).val();
+                else
+                    objects[c] = null;
+            }
+            this.eventBeforeCreate(objects);
         }
 
         $.ajax({
@@ -183,6 +221,26 @@ class NestedForms
         var result = confirm("Want to delete?");
         if (result)
         {
+            // RAISE EVENT BEFORE EDIT
+            var objects = {};
+            for(var c in this.columns)
+            {
+                var val = $('#' + c).val();
+                if(typeof val !== 'undefined')
+                    objects[c] = $('#' + c).val();
+                else
+                {
+                    // TODO: there are no hidden input for visible false
+                    // if its the key the value is current id
+                    if(this.columns[c].key == true)
+                        objects[c] = id;
+                    else
+                        objects[c] = null;
+                }
+
+            }
+            this.eventBeforeDelete(objects);
+
             $.ajax({
                 context: this,
                 type: 'POST',

@@ -95,7 +95,7 @@ class NestedForms
             var type = this.customurls.show.type;
         }
 
-        var url = str.replace("{id}", id);
+        var url = url.replace("{id}", id);
 
         $.ajax({
             context: this,
@@ -135,7 +135,7 @@ class NestedForms
                 var type = this.customurls.update.type;
             }
 
-            var url = str.replace("{id}", id);
+            var url = url.replace("{id}", id);
 
             // RAISE EVENT BEFORE EDIT
             var objects = {};
@@ -184,8 +184,8 @@ class NestedForms
 
         $.ajax({
             context: this,
-            type: url,
-            url: type,
+            type: type,
+            url: url,
             data: _this.serialize(),
             headers: {
                 'X-CSRF-TOKEN': this.token,
@@ -206,7 +206,6 @@ class NestedForms
                     $('#modal-form').modal('hide');
                     $(".modal-backdrop").remove(); //TODO: Bug, forcing to remove modal-backdrop, or it still remain
                     this.resourceReloadRender();
-
                 }
             },
             error: function (xhr, textStatus, errorThrown) {

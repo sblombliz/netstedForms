@@ -222,24 +222,7 @@ class NestedForms
         if (result)
         {
             // RAISE EVENT BEFORE EDIT
-            var objects = {};
-            for(var c in this.columns)
-            {
-                var val = $('#' + c).val();
-                if(typeof val !== 'undefined')
-                    objects[c] = $('#' + c).val();
-                else
-                {
-                    // TODO: there are no hidden input for visible false
-                    // if its the key the value is current id
-                    if(this.columns[c].key == true)
-                        objects[c] = id;
-                    else
-                        objects[c] = null;
-                }
-
-            }
-            this.eventBeforeDelete(objects);
+            this.eventBeforeDelete(id);
 
             $.ajax({
                 context: this,

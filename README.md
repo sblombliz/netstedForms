@@ -30,9 +30,9 @@ This system works with rest url, if you need, you can build your php connection 
 - **customButtons:** (array of objects)
   - **name:** (string) label name of button
   - **url:** (string) href destination of button
-- **eventBeforeCreate** (function(item)) This event will be raised before start ajax Create request. Param "item" contain all visibile form values.
-- **eventBeforeEdit** (function(item)) This event will be raised before start ajax Edit request. Param "item" contain all visibile form values.
-- **eventBeforeDelete** (function(item)) This event will be raised before start ajax Delete request. Param "item" contain all visibile form values.
+- **eventBeforeCreate** (function(form_items)) This event will be raised before start ajax Create request. Param "form_items" contain all visibile form values.
+- **eventBeforeEdit** (function(form_items)) This event will be raised before start ajax Edit request. Param "form_items" contain all visibile form values.
+- **eventBeforeDelete** (function(id)) This event will be raised before start ajax Delete request. Param "id" contain id of delete item.
 
 This is an Example of implementation:
 ```
@@ -100,14 +100,14 @@ This is an Example of implementation:
                     button_send: "Custom Send Text",    //defaultValue: "Send"
                     button_close: "Custom Close Text",  //defaultValue: "Close"
                 },
-                eventBeforeCreate: function(item) {
-                    console.log(item);
+                eventBeforeCreate: function(form_items) {
+                    console.log(form_items);
                 },
-                eventBeforeEdit: function(item) {
-                    console.log(item);
+                eventBeforeEdit: function(form_items) {
+                    console.log(form_items);
                 },
-                eventBeforeDelete: function(item) {
-                    console.log(item);
+                eventBeforeDelete: function(id) {
+                    console.log(id);
                 },
                 token: 'MySecretTokenText',
             });

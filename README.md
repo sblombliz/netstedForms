@@ -30,9 +30,9 @@ This system works with rest url, if you need, you can build your php connection 
 - **customButtons:** (array of objects)
   - **name:** (string) label name of button
   - **url:** (string) href destination of button
-- **eventBeforeCreate** (function(form_items)) This event will be raised before start ajax Create request. Param "form_items" contain all visibile form values.
-- **eventBeforeEdit** (function(form_items)) This event will be raised before start ajax Edit request. Param "form_items" contain all visibile form values.
-- **eventBeforeDelete** (function(id)) This event will be raised before start ajax Delete request. Param "id" contain id of delete item.
+- **eventBeforeCreate** (function(form_items)) This event will be raised before start ajax Create request. Param "form_items" contain all visibile form values. Returning false, will block the ajax request.
+- **eventBeforeEdit** (function(form_items)) This event will be raised before start ajax Edit request. Param "form_items" contain all visibile form values. Returning false, will block the ajax request.
+- **eventBeforeDelete** (function(id)) This event will be raised before start ajax Delete request. Param "id" contain id of delete item. Returning false, will block the ajax request.
 
 This is an Example of implementation:
 ```

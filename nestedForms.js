@@ -155,7 +155,14 @@ class NestedForms
                 }
 
             }
-            this.eventBeforeEdit(objects);
+
+            let result = this.eventBeforeEdit(objects);
+            if(result === false)
+            {
+                $('#modal-form').modal('hide');
+                return;
+            }
+
         }
         else
         {
@@ -179,7 +186,15 @@ class NestedForms
                 else
                     objects[c] = null;
             }
-            this.eventBeforeCreate(objects);
+
+            let result = this.eventBeforeCreate(objects);
+            if(result === false)
+            {
+                $('#modal-form').modal('hide');
+                return; // do not execute ajax
+            }
+
+
         }
 
         $.ajax({
@@ -221,7 +236,10 @@ class NestedForms
         if (result)
         {
             // RAISE EVENT BEFORE EDIT
-            this.eventBeforeDelete(id);
+            let result = this.eventBeforeDelete(id);
+            if(result === false)
+                return;
+
 
             $.ajax({
                 context: this,
@@ -252,28 +270,28 @@ class NestedForms
         $('#modal-form').remove();
 
         var content =  '<div class="modal fade" id="modal-form" role="dialog">';
-            content += '    <div class="modal-dialog">';
-            content += '        <div class="modal-content">';
+        content += '    <div class="modal-dialog">';
+        content += '        <div class="modal-content">';
 
-            content += '            <form method="POST" action="" accept-charset="UTF-8" autocomplete="off" id="frm">';
+        content += '            <form method="POST" action="" accept-charset="UTF-8" autocomplete="off" id="frm">';
 
-            content += '            <div class="modal-header">';
-            content += '               <button type="button" class="close" data-dismiss="modal">&times;</button>';
-            content += '                <h4 class="modal-title">Add / Edit</h4>';
-            content += '            </div>';
+        content += '            <div class="modal-header">';
+        content += '               <button type="button" class="close" data-dismiss="modal">&times;</button>';
+        content += '                <h4 class="modal-title">Add / Edit</h4>';
+        content += '            </div>';
 
-            content += '            <div class="modal-body">';
-            content += '                <div id="form-fields" class="row"></div>';
-            content += '            </div>';
+        content += '            <div class="modal-body">';
+        content += '                <div id="form-fields" class="row"></div>';
+        content += '            </div>';
 
-            content += '            <div class="modal-footer">';
-            content += '            </div>';
+        content += '            <div class="modal-footer">';
+        content += '            </div>';
 
-            content += '            </form>';
+        content += '            </form>';
 
-            content += '        </div>';
-            content += '    </div>';
-            content += '</div>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '</div>';
 
         this.elementDiv.append(content);
 

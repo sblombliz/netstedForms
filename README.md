@@ -29,7 +29,7 @@ This system works with rest url, if you need, you can build your php connection 
   - **button_close:** (string) custom name for Close Button
 - **customButtons:** (array of objects)
   - **name:** (string) label name of button
-  - **url:** (string) href destination of button
+  - **url:** (string) href destination of button. You can use a column key (using the bottom example, like {id} or {role_id}) if you need to use the row value.
 - **eventBeforeCreate** (function(form_items)) This event will be raised before start ajax Create request. Param "form_items" contain all visibile form values. Returning false, will block the ajax request.
 - **eventBeforeEdit** (function(form_items)) This event will be raised before start ajax Edit request. Param "form_items" contain all visibile form values. Returning false, will block the ajax request.
 - **eventBeforeDelete** (function(id)) This event will be raised before start ajax Delete request. Param "id" contain id of delete item. Returning false, will block the ajax request.

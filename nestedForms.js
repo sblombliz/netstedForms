@@ -467,7 +467,6 @@ class NestedForms
                     var columnKeys = Object.keys(this.columns);
                     if (columnKeys.includes(col) && this.columns[col].visible)
                     {
-                        //console.log(this.columns[col].resources);
                         if (this.columns[col].resources != null)
                         {
                             if (this.isJSON(this.columns[col].resources))
@@ -485,28 +484,35 @@ class NestedForms
 
                 contentValues += '<td id="action_buttons_' + row + '">';
 
-                var delBtn = document.createElement('a');
+                let delBtn = document.createElement('a');
                 delBtn.style = "margin: 0px 2px;";
                 delBtn.className = "btn btn-danger inline";
                 delBtn.href = "#";
                 delBtn.innerHTML = "Delete";
                 delBtn.addEventListener("click", this.resourceActionDelete.bind(this, data[row][this.key]));
 
-                var editBtn = document.createElement('a');
+                let editBtn = document.createElement('a');
                 editBtn.style = "margin: 0px 2px;";
                 editBtn.className = "btn btn-primary inline";
                 editBtn.href = "#";
                 editBtn.innerHTML = "Edit";
                 editBtn.addEventListener("click", this.resourceClickEdit.bind(this, data[row][this.key]));
 
-                var customB = [];
-                for(var index in this.customButtons)
+                let customB = [];
+                for(let index in this.customButtons)
                 {
-                    var item = this.customButtons[index];
-                    var buttn = document.createElement('a');
+                    let item = this.customButtons[index];
+
+                    // parsing urls
+                    let parsedUrl = "";
+                    for(let c in this.columns)
+                        if(item.url.includes('{'+c+'}'))
+                            parsedUrl = item.url.replace('{'+c+'}', data[row][c]);
+
+                    let buttn = document.createElement('a');
                     buttn.style = "margin: 0px 2px;";
                     buttn.className = "btn btn-info inline";
-                    buttn.href = item.url;
+                    buttn.href = parsedUrl;
                     buttn.innerHTML = item.name;
                     customB.push(buttn);
                 }
@@ -543,6 +549,11 @@ class NestedForms
             this.reportError("Invalid JSON! You must use json object as resource!");
 
         return isJson;
+    }
+
+    replaceTagWithParams()
+    {
+
     }
 
     reportError(error_message)

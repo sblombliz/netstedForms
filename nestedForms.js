@@ -69,6 +69,8 @@ class NestedForms
                     if(this.filter != null)
                         data = data.filter(this.filterData, this);
 
+                    this.data = data;
+
                     this.resourceRender(data);
                 },
                 error: function (xhr, status, error) {
@@ -157,11 +159,18 @@ class NestedForms
             }
 
             let result = this.eventBeforeEdit(objects);
-            if(result === false)
+            if(typeof result !== 'undefined')
             {
-                $('#modal-form').modal('hide');
-                return;
+                if (result.request_break === true)
+                {
+                    $('#modal-form').modal('hide');
+                    return;
+                }
+
+                if (result.form_items)
+                    this.saveToForm(result.form_items);
             }
+
 
         }
         else
@@ -188,10 +197,16 @@ class NestedForms
             }
 
             let result = this.eventBeforeCreate(objects);
-            if(result === false)
+            if(typeof result !== 'undefined')
             {
-                $('#modal-form').modal('hide');
-                return; // do not execute ajax
+                if (result.request_break === true)
+                {
+                    $('#modal-form').modal('hide');
+                    return;
+                }
+
+                if (result.form_items)
+                    this.saveToForm(result.form_items);
             }
 
 
@@ -228,6 +243,14 @@ class NestedForms
             }
         });
         return false;
+    }
+
+    saveToForm(data_objects)
+    {
+        for(let c in data_objects)
+        {
+            $('#'+c).val(data_objects[c]);
+        }
     }
 
     resourceActionDelete(id)

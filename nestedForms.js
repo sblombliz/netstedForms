@@ -5,38 +5,42 @@ class NestedForms
     {
         this.error = false;
 
-        // Check for missing Key
-        this.key = "";
-        for(var c in params.columns)
-            if(params.columns[c].key)
-                this.key = c;
-
-        if(this.key == "")
-            this.reportError("Missing Key! You must put a key = true on a column!");
-
-        // setting labels
-        this.labels = {};
-        if(params.labels)
+        if(Boolean(params.disabled))
         {
-            if (params.labels.button_send == undefined) this.labels.button_send = "Send";
-            else this.labels.button_send = params.labels.button_send;
 
-            if (params.labels.button_close == undefined) this.labels.button_close = "Close";
-            else this.labels.button_close = params.labels.button_close;
+            // Check for missing Key
+            this.key = "";
+            for (var c in params.columns)
+                if (params.columns[c].key)
+                    this.key = c;
+
+            if (this.key == "")
+                this.reportError("Missing Key! You must put a key = true on a column!");
+
+            // setting labels
+            this.labels = {};
+            if (params.labels)
+            {
+                if (params.labels.button_send == undefined) this.labels.button_send = "Send";
+                else this.labels.button_send = params.labels.button_send;
+
+                if (params.labels.button_close == undefined) this.labels.button_close = "Close";
+                else this.labels.button_close = params.labels.button_close;
+            }
+
+            this.resourceModel = params.model;
+            this.filter = params.filter;
+            this.elementDiv = $('#' + params.elementID);
+            this.columns = params.columns;
+            this.customButtons = params.customButtons;
+            this.token = params.token;
+            this.resourceIndex();
+            this.renderModal();
+
+            this.eventBeforeCreate = params.eventBeforeCreate;
+            this.eventBeforeEdit = params.eventBeforeEdit;
+            this.eventBeforeDelete = params.eventBeforeDelete;
         }
-
-        this.resourceModel = params.model;
-        this.filter = params.filter;
-        this.elementDiv = $('#' + params.elementID);
-        this.columns = params.columns;
-        this.customButtons = params.customButtons;
-        this.token = params.token;
-        this.resourceIndex();
-        this.renderModal();
-
-        this.eventBeforeCreate = params.eventBeforeCreate;
-        this.eventBeforeEdit = params.eventBeforeEdit;
-        this.eventBeforeDelete = params.eventBeforeDelete;
 
     }
 
@@ -155,7 +159,6 @@ class NestedForms
                     else
                         objects[c] = null;
                 }
-
             }
 
             let result = this.eventBeforeEdit(objects);
@@ -170,8 +173,6 @@ class NestedForms
                 if (result.form_items)
                     this.saveToForm(result.form_items);
             }
-
-
         }
         else
         {

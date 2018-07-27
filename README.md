@@ -12,7 +12,8 @@ your custom URLs.
 This system works with rest url, if you need, you can build your php connection with your methos. All results to js must be JSON formatted
 
 ### EXPLANATION OF THE PARAMS:
-- **model:** (string) [optional] Models are used to generate form urls, for example if you use 'users' as model name, form action url will be generated as '/users/' and '/users/{id}'. See code example in customurl section for defaults.
+- **model:** (string) Models are used to generate form urls, for example if you use 'users' as model name, form action url will be generated as '/users/' and '/users/{id}'. See code example in customurl section for defaults.
+- **disabled** (true/false) Disable plugin. 
 - **elementID:** (string) [needed] The ID of element to attach results and modal window, this is the main container.
 - **filter:** (object) You can nest a form in relation with a column, specifying column and value of the main param. All crud operations will be based on this column.
   - **column:** (string) Name of the netsted column
